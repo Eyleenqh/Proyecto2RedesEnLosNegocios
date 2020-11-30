@@ -1,0 +1,259 @@
+/* 
+    Created on : Apr 3, 2019, 10:01:38 PM
+    Author     : Eyleen
+*/
+@media screen and (max-width: 800px) {
+    #paginaPrincipal{
+        width:100%;
+    }
+    #contacto{
+        width: 100%;
+    }
+}
+
+@media screen and (max-device-width : 480px) {
+    #myNavBar{
+        display:none;
+    }
+    #menu{
+        text-align:center;
+    }
+    #contenido{
+        text-align: center;
+    }    
+
+}
+
+@media screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape){
+    .container-fluid
+    {
+        width: 100%;
+
+    }
+}
+
+.body{
+    background: #B59B9A;
+    font:500 16px Latp, verdana;
+    line-height: 1.8 ;
+    color: #818181;
+}
+.jumbotrom{
+    background: #000000 url(../img/fondo4.jpg);
+    color: #FFFFFF;
+    padding: 150px 100px;
+}
+
+.logo {
+    color: #FFFFFF;
+    font-size: 30px
+}
+
+.logo-small{
+    color: #d9534F;
+    font-size: 50px
+}
+
+h2{
+    font-size: 24px;
+    text-transform: uppercase; 
+    color: #303030;
+    font-weight: 600;
+    margin: 30px ;
+}
+h4{
+    font-size: 20px;
+    line-height: 1.35em;
+    color: #132B54;
+    font-weight: 400;
+    margin-bottom: 30px ;
+}
+
+.container-fluid{
+    padding: 60px 50px;    
+}
+
+.container-fluid a{       
+}
+
+.backgroud-grey{
+    background-color:  #f6f7f8;
+    border-style: solid;
+    border-width: 3px;
+    border-bottom-color: #000000;
+}
+
+.navbar{
+    margin-bottom: 0px;
+    background-color: #000000 ;
+    z-index: 9999 ;
+    border: 0;
+    font-size: 12px !important;
+    line-height: 1.5 !important;
+    letter-spacing: 4px !important;
+    border-radius: 0 !important;
+}
+
+.navbar li a, .navbar .navbar-brand{
+    color: #FFFFFF !important;
+}
+
+.navbar-nav li a:hover, .navbar-nav li.active a, .navbar-nav li.active span, .navbar-nav li span:hover {
+    color: #0E6EB2 !important;
+    background-color: #FFFFFF !important;
+}
+
+.promo{
+    padding: 40px 30px;      
+    margin: 5px ;
+    background-color: #FFE400;
+}
+
+.nombre{
+    font-size: 19px;
+    line-height: 1em;
+    color: #470101;
+    font-weight: 400;
+    margin-bottom: 30px ;
+}
+
+.informacion{
+    font-size: 15px;
+    line-height: 1em;
+    color: #000000;
+    font-weight: 400;
+    margin-bottom: 9px ;
+    text-align: justify;
+}
+
+.nmenu{
+    font-size: 19px;
+    line-height: 1em;
+    color: #470101;
+    font-weight: 400;
+    margin-bottom: 30px ;
+}
+
+.nombreprodc{
+    display: block;
+    margin: 15px;  
+    font-size: 15px;
+    line-height: 1em;
+    color: #000000;
+    font-weight: 400;
+    margin-bottom: 5px ;
+    vertical-align: 12px;
+
+}
+.imgestilo{
+    padding: 0px 0px;      
+    margin: 20px ;
+}
+
+.botones{ 
+    margin: 70px ; 
+    margin-top: 5px ; 
+    color: #FF0303;
+    border: 50px;
+    border-color: #FF0303;
+    border-width: 5px;
+}
+
+.flex{
+    width: 100%;
+    height:100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+/*diseño del todos los modals*/
+.modal{
+    display: none;
+    position: fixed;
+    z-index:1;
+    overflow: auto;
+    left:0;
+    top:0;
+    width: 100%;
+    height:100%;
+    background: rgba(0, 0, 0, 0.350);
+}
+/*diseño del contenido del modal*/
+.contenido-modal{
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    width: 30%;
+    box-shadow: 0 0 6px 0 rgba(0, 0, 0, .4);
+    animation-name: modal;
+    animation-duration: 1s;
+}
+@keyframes modal{
+    from{top:-330px; opacity:0;}
+    to{top:0; opacity:1;}
+}
+.modal-body{
+    padding: 20px 16px;
+}
+/*diseño del boton para salir del modal */
+.close{
+    color: #f6f6f6;
+    font-size:45px;
+    font-weight: bold;
+}
+.close:hover{
+    color:#7FEAFF;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-header, .footer{
+    padding: 8px 16px;
+    background: #FFE400;
+    color:#FFE400;
+}
+
+/*adaptcion del model a la pantalla*/
+@media screen and (max-width:600px){
+    .contenido-modal{
+        width: 70%;
+    }
+    .modal{
+        margin-top: 50px;
+    }
+}
+@media screen and (max-width:768px){
+    .contenido-modal{
+        width: 70%;
+    }
+    .modal{
+        margin-top: 50px;
+    }
+}
+
+@media screen and (max-width:320px){
+    .contenido-modal{
+        width: 70%;
+    }
+    .modal{
+        margin-top: 20px;
+    }
+}
+
+@media screen and (min-width:1024px){
+    .contenido-modal{
+        width: 40%;
+    }
+     .modal{
+        margin-top: 40px;
+    }
+}
+
+@media screen and (min-width:768px) and (max-height:1024){
+    .contenido-modal{
+        width: 70%;
+    }
+    .modal{
+        margin-top: 50px;
+    }
+}

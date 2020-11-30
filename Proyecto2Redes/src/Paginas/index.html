@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Plataforma de ventas</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" type="image/x-icon" href="img/icono.ico"/>
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"> 
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD2DRvPhPanQ_0fqwUU5tcER54l0YD4I7g"></script>
+
+
+        <link rel="stylesheet" href="css/estilo.css" type="text/css"/>
+        <script type="text/javascript" src="js/script.js"></script>
+
+    </head>
+    <body id="paginaPrincipal" data-spy="scroll" data-target=".navbar" data-offeset="60">                       
+
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <!--Sera un contenedor con 12 columnas-->
+            <div class="container">
+                <div class= "navbar-header"> <!--Modo de visualizacion vertical-->
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavBar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#paginaPrincipal">
+                        <img class=" img-responsive" alt="Plataforma Web de venta de comidas" src="img/logo.png"/>
+                    </a>
+                </div>
+                <div class="collapse navbar-collapse" id="myNavBar"><!--Modo de visualizacion horizontal-->
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#restaurantes">RESTAURANTES</a></li>
+                        <li><a href="#promociones">PROMOCIONES</a></li>
+                        <li><a href="#char">ESTADISTICAS</a></li>
+                        <li><a href="#contacto">CONTACTO</a></li>
+                        <li><a href="carritoCompras.html"><span class="glyphicon glyphicon-shopping-cart logo"></span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="jumbotrom">
+            <!--<h1>Plataforma de ventas</h1>-->                    
+            <h1>Para Notificación de Nuevas Promociones</h1>
+            <form>
+                <div class="input-group">
+                    <input id="entCorreo" type="input" class="form-control" size="50" placeholder="Correo: ejemplo@email.com" required/>
+                    <div>
+                        <button type="button" class="btn btn-danger" onclick="correoLanding()">
+                            Registrarse
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+
+
+        <div id="inicio" class="container-fluid">
+            <div class="row">
+
+                <div class="col-sm-3" id="restaurantes">
+                    <h4 class="text-center">Lista de Restaurantes</h4>
+                    <p class="informacion text-center">Dale "click" sobre el nombre del restaurante al que quieres acceder.</p>
+                    <a onclick="ingresaContenido('restaurante La Feria')"> Restaurante La Feria</a></br>
+                    <a onclick="ingresaContenido('restaurante Mundo de Sabores')">Restaurante Mundo de Sabores</a></br>
+                    <a onclick="ingresaContenido('restaurante Nuevo Hong Kong')">Restaurante Nuevo Hong Kong</a></br>
+                    <a onclick="ingresaContenido('restaurante Rostizados')">Restaurante Rostizados</a></br>
+                    <a onclick="ingresaContenido('restaurante La Garza')">Restaurante La Garza</a>
+
+                    <div class='Collapse' id="char">
+                        <h4 class="text-center">Char Estadistico</h4>
+                        <canvas id="myChart" width="400" height="400"></canvas>
+                        <script>
+                            var chart = document.getElementById('myChart').getContext('2d');
+                            var myChart = new Chart(chart, {type: 'bar', data: {
+                                    labels: obtenerRestaurantes(),
+                                    datasets: [{
+                                            label: 'Producto mas costoso',
+                                            data: mayoresPrecios(),
+                                            backgroundColor: [
+                                                'rgba(255, 99, 132, 0.2)',
+                                                'rgba(54, 162, 235, 0.2)',
+                                                'rgba(255, 206, 86, 0.2)',
+                                                'rgba(75, 192, 192, 0.2)',
+                                                'rgba(153, 102, 255, 0.2)',
+                                                'rgba(255, 159, 64, 0.2)'
+                                            ],
+                                            borderColor: [
+                                                'rgba(255, 99, 132, 2)',
+                                                'rgba(54, 162, 235, 2)',
+                                                'rgba(255, 206, 86, 2)',
+                                                'rgba(75, 192, 192, 2)',
+                                                'rgba(153, 102, 255, 2)',
+                                                'rgba(255, 159, 64, 2)'
+                                            ],
+                                            borderWidth: 1
+                                        }]
+                                },
+                                options: {
+                                    scales: {
+                                        yAxes: [{
+                                                ticks: {
+                                                    beginAtZero: true
+                                                }
+                                            }]
+                                    }
+                                }
+                            });
+                        </script>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <h4 class="text-center">Contenido</h4> 
+                    <div class="nombre text-center" id="nombrer"> </div>
+                    <div class="informacion" id="descripcionr"></div>
+                    <div class="informacion" id="horarior"></div>
+                    <div class="informacion" id="ubicacionr"></div>
+                    <div class="imgestilo" id="mapa" style="width:100%;height:300px;"></div>
+
+                    <div class="nmenu text-center" id="menu"></div>
+                    <!--Productos del menu-->
+                    <div class="nombreprodc text-center" id="p1"></div>
+                    <div class="imgestilo text-center img-responsive" id="img1"></div>
+                    <form id="boton1" class="botones text-center" onclick="agregarProductos('boton1')"> </form>
+
+                    <div class="nombreprodc text-center" id="p2"></div>
+                    <div class="imgestilo text-center img-responsive" id="img2"></div>
+                    <form id="boton2" class="botones text-center" onclick="agregarProductos('boton2')"> </form>
+
+                    <div class="nombreprodc text-center" id="p3"></div>
+                    <div class="imgestilo text-center img-responsive" id="img3"></div>
+                    <form id="boton3" class="botones text-center" onclick="agregarProductos('boton3')"> </form>
+
+                    <div class="nombreprodc text-center" id="p4"></div>
+                    <div class="imgestilo text-center img-responsive" id="img4"></div>
+                    <form id="boton4" class="botones text-center" onclick="agregarProductos('boton4')"> </form>
+
+                    <div class="nombreprodc text-center " id="p5"></div>
+                    <div class="imgestilo text-center img-responsive" id="img5"></div>
+                    <form id="boton5" class="botones text-center" onclick="agregarProductos('boton5')"> </form>
+                </div>
+
+                <div id="promociones" class="col-sm-3 " >
+                    <h4 class="text-center">Promociones</h4>
+                    <form>
+                        <div class="promo text-center">
+                            <a><img href="#" id="abrir" src="img/promociones/promocion1.png" alt="Promocion 1" width='265' height='206' onmouseover="llenarVentana('promo1')" class="img-responsive"></a> 
+
+                            <div id="miModal" class="modal">
+                                <div class="flex" id="flex">
+                                    <div class="contenido-modal">
+                                        <div class="modal-header flex">
+                                            <h2 id="tituloModal"></h2>
+                                            <span class="close" id="close">&times;</span>
+                                        </div>
+                                        <div id="imgm1" class="imgestilo img-responsive"></div>
+                                        <div class="modal-body">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal" onclick="agregarProductos('promo1')">Comprar</button>  
+                                            <p id="descripcionPromo" class="text-center"></p>
+                                            <p id="precioPromo" class="text-center"></p>
+                                        </div>
+                                        <div class="footer">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <p> </p>
+                            <p class="text-center"><b>Precio: ₡10500</b></p>
+                        </div>
+                        <div class="promo text-center">
+                            <a><img href="#" id="abrir2" src="img/promociones/promocion2.png" alt="Promocion 2" width='265' height='206' onmouseover="llenarVentana('promo2')" class="img-responsive"/></a>
+
+                            <div id="miModal2" class="modal">
+                                <div id="flex2" class="flex">
+                                    <div class="contenido-modal">
+                                        <div class="modal-header flex">
+                                            <h2 id="tituloModal2"></h2>
+                                            <span class="close" id="close2">&times;</span>
+                                        </div>
+                                        <div id="imgm2" class="imgestilo img-responsive"></div>
+                                        <div class="modal-body">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal" onclick="agregarProductos('promo2')">Comprar</button>
+                                            <p id="descripcionPromo2" class="text-center"></p>
+                                            <p id="precioPromo2" class="text-center"></p>
+                                        </div>
+                                        <div class="footer">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p> </p>
+                            <p class="text-center"><b>Precio: ₡5000</b></p>
+                        </div>
+
+                        <div class="promo text-center">
+                            <a><img href="#" id="abrir3" src="img/promociones/promocion3.png" alt="Promocion 3" width='265' height='206' onmouseover="llenarVentana('promo3')" class="img-responsive"/></a>
+
+                            <div id="miModal3" class="modal">
+                                <div id="flex3" class="flex">
+                                    <div class="contenido-modal">
+                                        <div class="modal-header flex">
+                                            <h2 id="tituloModal3"></h2>
+                                            <span class="close" id="close3">&times;</span>
+                                        </div>
+                                        <div id="imgm3" class="imgestilo img-responsive"></div>
+                                        <div class="modal-body">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal" onclick="agregarProductos('promo3')">Comprar</button>
+                                            <p id="descripcionPromo3" class="text-center"></p>
+                                            <p id="precioPromo3" class="text-center"></p>
+                                        </div>
+                                        <div class="footer">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p> </p>
+                            <p class="text-center"><b>Precio: ₡21400</b></p>
+                        </div>
+
+                        <div class="promo text-center">
+                            <a><img href="#" id="abrir4" src="img/promociones/promocion4.png" alt="Promocion 4" width='265' height='206' onmouseover="llenarVentana('promo4')" class="img-responsive" /></a>
+                            <div id="miModal4" class="modal">
+                                <div id="flex4" class="flex">
+                                    <div class="contenido-modal">
+                                        <div class="modal-header flex">
+                                            <h2 id="tituloModal4"></h2>
+                                            <span class="close" id="close4">&times;</span>
+                                        </div>
+                                        <div id="imgm4" class="imgestilo img-responsive"></div>
+                                        <div class="modal-body">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal" onclick="agregarProductos('promo4')">Comprar</button>
+                                            <p id="descripcionPromo4" class="text-center"></p>
+                                            <p id="precioPromo4" class="text-center"></p>
+                                        </div>
+                                        <div class="footer">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <p> </p>
+                            <p class="text-center"><b>Precio: ₡2475</b></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript" src="js/scriptModel.js"></script>
+
+        <div id="contacto" class="container-fluid backgroud-grey">
+            <h2>CONTACTO</h2>
+            <div class="row"> 
+                <div class="col-sm-5">
+                    <p>Proyecto 1 de Lenguajes para Aplicaciones Comerciales</p>
+                    <p>Informacion de contacto del desarrollador</p>
+                    <p><i class="fas fa-chalkboard-teacher"></i> Eyleen Quiros</p>
+                    <p><spam class="glyphicon glyphicon-envelope"></spam> eyleenqh@hotmail.com </p>
+                </div>
+                <div class="col-sm-7">
+                    <p>Para cualquier consulta también puede comunicarse enviando un mensaje en el siguiente espacio:</p>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <input class=form-control type="text" name="nombre" id="nombre" placeholder="Nombre">
+                        </div>
+                        <div class="col-sm-6">
+                            <input class=form-control type="text" name="correo" id="correo" placeholder="Correo">
+                        </div>
+                    </div>
+
+                    <textarea class=form-control id="mensaje" name="mensaje" placeholder="Mensaje" rows="5"></textarea>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <button class="btn-default" type="submit">Enviar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
