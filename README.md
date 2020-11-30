@@ -8,6 +8,27 @@ A continuación se listará el software que se utilizó para la elaboración del
 * Netbeans 8.2 como entorno de desarrollo
 * Un navegador web
 
+## Crear certificado
+Usando Java keytool se va a crear un certificado autofirmado y así poder utilizarlo en el protocolo https, para crearlo se deben seguir los siguientes pasos:
+
+1. Abrir el símbolo el sistema(cmd) en modo administrador
+
+2. Posicionarse, usando "cd" en la carpeta donde se encuentra keytool.exe ubicado en la carpeta "bin" de la ruta de instalación del JDK.
+
+3. Ingresar el comando "keytool -genkey -keyalg RSA -alias selfsigned -keystore key.jks -storepass 123456-validity 360 -keysize 2048" y ejecutarlo.
+
+4. Ingresar el nombre, departamento de la organización, la ciudad, el estado o provincia y el código de dos letras de país.
+
+5. Si los datos anteriores están bien ingresar "y" y ejecutar, de lo contario ingresar "n" ejecutar y volver a repetir desde el paso 4.
+
+6. Ingresar la contraseña del alias "123456" y ejecutar.
+
+7. Volver a ingresar la contraseña del alias, ejecutar y listo, el certificado se creo en la carpeta "bin".
+
+En el proyecto, en la clase "ServidorHttps" debe cambiar la ruta del certificado, por el que se creo en los pasos anteriores.
+
+En caso de que se decida cambiar el nombre de certificado o las contraseñas, deberá realizar los cambios en "ServidorHttps" para que utilice los nuevos datos.
+
 ## Pasos para instalar y modificar el proyecto
 Primeramente se debe clonar este repositorio o bien, descargar el código comprimido.
 
