@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Plataforma de ventas</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">        
+        <link rel="shortcut icon" type="image/x-icon" href="img/icono.ico"/>
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+        <link rel="stylesheet" href="css/estilo.css" type="text/css"/>
+        <script type="text/javascript" src="js/script.js" ></script>
+
+    </head>
+    <body id="paginaPrincipal" data-spy="scroll" data-target=".navbar" data-offeset="60" onload="lista()">
+
+        <body id="paginaPrincipal" data-spy="scroll" data-target=".navbar" data-offeset="60">                       
+
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <!--Sera un contenedor con 12 columnas-->
+            <div class="container">
+                <div class= "navbar-header"> <!--Modo de visualizacion vertical-->
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavBar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.html">
+                        <img class="img-responsive" alt="Plataforma Web de venta de comidas" src="img/logo.png"/>
+                    </a>
+                </div>
+                <div class="collapse navbar-collapse" id="myNavBar"><!--Modo de visualizacion horizontal-->
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#restaurantes">RESTAURANTES</a></li>
+                        <li><a href="#promociones">PROMOCIONES</a></li>
+                        <li><a href="#char">ESTADISTICAS</a></li>
+                        <li><a href="#contacto">CONTACTO</a></li>
+                        <li><a href="carritoCompras.html"><span class="glyphicon glyphicon-shopping-cart logo"></span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="jumbotrom text-center">
+            <h1>Plataforma de ventas</h1>
+        </div>
+
+
+        <div id="descripcion" class="container-fluid">
+            <div class="row">
+
+                <div class="col-sm-3" id="restaurantes">
+                    <h4 class="text-center">Lista de Restaurantes</h4>
+                    <a href="index.html"> Restaurante La Feria</a></br>
+                    <a href="index.html">Restaurante Mundo de Sabores</a></br>
+                    <a href="index.html">Restaurante Nuevo Hong Kong</a></br>
+                    <a href="index.html">Restaurante Rostizados</a></br>
+                    <a href="index.html">Restaurante La Garza</a>
+
+                    <div class='Collapse' id="char">
+                        <h4 class="text-center">Char Estadistico</h4>
+                        <canvas id="myChart" width="400" height="400"></canvas>
+                        <script>
+                            var chart = document.getElementById('myChart').getContext('2d');
+                            var myChart = new Chart(chart, {type: 'bar', data: {
+                                    labels: obtenerRestaurantes(),
+                                    datasets: [{
+                                            label: 'Producto mas costoso',
+                                            data: mayoresPrecios(),
+                                            backgroundColor: [
+                                                'rgba(255, 99, 132, 0.2)',
+                                                'rgba(54, 162, 235, 0.2)',
+                                                'rgba(255, 206, 86, 0.2)',
+                                                'rgba(75, 192, 192, 0.2)',
+                                                'rgba(153, 102, 255, 0.2)',
+                                                'rgba(255, 159, 64, 0.2)'
+                                            ],
+                                            borderColor: [
+                                                'rgba(255, 99, 132, 2)',
+                                                'rgba(54, 162, 235, 2)',
+                                                'rgba(255, 206, 86, 2)',
+                                                'rgba(75, 192, 192, 2)',
+                                                'rgba(153, 102, 255, 2)',
+                                                'rgba(255, 159, 64, 2)'
+                                            ],
+                                            borderWidth: 1
+                                        }]
+                                },
+                                options: {
+                                    scales: {
+                                        yAxes: [{
+                                                ticks: {
+                                                    beginAtZero: true
+                                                }
+                                            }]
+                                    }
+                                }
+                            });
+                        </script>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <h4 class="text-center">Contenido</h4>  
+
+                    <article id="productos" class="nombreprodc">
+                        <h4 class="text-center">Lista de Productos</h4>
+                    </article>
+                    <article id='total' class="nombreprodc text-center">
+                    </article>
+                    <article id='totalImpuestos' class="nombreprodc text-center">
+                    </article>
+
+
+                    <article id="rellenar" class="backgroud-grey ">
+                        <h4 class="text-center">Información para envio</h4>
+                        <form class="text-center" onsubmit="return confirmar()">
+                            <div>
+                                <label for="provincia"> Provincia: </label>
+                                <input type="text" id="provincia" name="provincia" required/> 
+                            </div>
+                            <div>
+                                <label for="canton"> Cantón: </label>
+                                <input type="text" id="canton" name="canton" required/> 
+                            </div>
+                            <div>
+                                <label for="distrito"> Distrito: </label>
+                                <input type="text" id="distrito" name="distrito" required/> 
+                            </div>
+                            <div> 
+                                <label for="otrassenas"> Otras señas: </label>
+                                <textarea id="otrassenas" name="otrassenas" cols="25" rows="1" required></textarea>                        
+                            </div>
+                            <div>
+                                <label for="telefono"> Teléfono: </label>
+                                <input type="text" id="telefono" name="telefono" required/> 
+                            </div>
+                            <div class="botones">
+                                <input type="submit" value="Confirmar" class="text-center"/>
+                            </div>
+                        </form>
+                    </article>
+                </div>
+
+                <div id="promociones" class="col-sm-3 " >
+                    <h4 class="text-center">Promociones</h4>
+                    <form>
+                        <div class="promo text-center">
+                            <a><img href="#" id="abrir" src="img/promociones/promocion1.png" alt="Promocion 1" width='265' height='206' onmouseover="llenarVentana('promo1')" class="img-responsive"></a> 
+
+                            <div id="miModal" class="modal">
+                                <div class="flex" id="flex">
+                                    <div class="contenido-modal">
+                                        <div class="modal-header flex">
+                                            <h2 id="tituloModal"></h2>
+                                            <span class="close" id="close">&times;</span>
+                                        </div>
+                                        <div id="imgm1" class="imgestilo img-responsive"></div>
+                                        <div class="modal-body">
+                                            <button type="submit" class="btn btn-default" data-dismiss="modal" onclick="agregarProductos('promo1')">Comprar</button>
+                                            <p id="descripcionPromo" class="text-center"></p>
+                                            <p id="precioPromo" class="text-center"></p>
+                                        </div>
+                                        <div class="footer">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p> </p>
+                            <p class="text-center"><b>Precio: ₡10500</b></p>
+                        </div>
+                        <div class="promo text-center">
+                            <a><img href="#" id="abrir2" src="img/promociones/promocion2.png" alt="Promocion 2" width='265' height='206' onmouseover="llenarVentana('promo2')" class="img-responsive"/></a>
+
+                            <div id="miModal2" class="modal">
+                                <div id="flex2" class="flex">
+                                    <div class="contenido-modal">
+                                        <div class="modal-header flex">
+                                            <h2 id="tituloModal2"></h2>
+                                            <span class="close" id="close2">&times;</span>
+                                        </div>
+                                        <div id="imgm2" class="imgestilo img-responsive"></div>
+                                        <div class="modal-body">
+                                            <button type="submit" class="btn btn-default" data-dismiss="modal" onclick="agregarProductos('promo2')">Comprar</button>
+                                            <p id="descripcionPromo2" class="text-center"></p>
+                                            <p id="precioPromo2" class="text-center"></p>
+                                        </div>
+                                        <div class="footer">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p> </p>
+                            <p class="text-center"><b>Precio: ₡5000</b></p>
+                        </div>
+
+                        <div class="promo text-center">
+                            <a><img href="#" id="abrir3" src="img/promociones/promocion3.png" alt="Promocion 3" width='265' height='206' onmouseover="llenarVentana('promo3')" class="img-responsive"/></a>
+
+                            <div id="miModal3" class="modal">
+                                <div id="flex3" class="flex">
+                                    <div class="contenido-modal">
+                                        <div class="modal-header flex">
+                                            <h2 id="tituloModal3"></h2>
+                                            <span class="close" id="close3">&times;</span>
+                                        </div>
+                                        <div id="imgm3" class="imgestilo img-responsive"></div>
+                                        <div class="modal-body">
+                                            <button type="submit" class="btn btn-default" data-dismiss="modal" onclick="agregarProductos('promo3')">Comprar</button>
+                                            <p id="descripcionPromo3" class="text-center"></p>
+                                            <p id="precioPromo3" class="text-center"></p>
+                                        </div>
+                                        <div class="footer">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p> </p>
+                            <p class="text-center"><b>Precio: ₡21400</b></p>
+                        </div>
+
+                        <div class="promo text-center">
+                            <a> <img href="#" id="abrir4" src="img/promociones/promocion4.png" alt="Promocion 4" width='265' height='206' onmouseover="llenarVentana('promo4')" class="img-responsive"/></a>
+                            <div id="miModal4" class="modal">
+                                <div id="flex4" class="flex">
+                                    <div class="contenido-modal">
+                                        <div class="modal-header flex">
+                                            <h2 id="tituloModal4"></h2>
+                                            <span class="close" id="close4">&times;</span>
+                                        </div>
+                                        <div id="imgm4" class="imgestilo img-responsive"></div>
+                                        <div class="modal-body">
+                                            <button type="submit" class="btn btn-default btn-responsive" data-dismiss="modal" onclick="agregarProductos('promo4')">Comprar</button>
+                                            <p id="descripcionPromo4" class="text-center"></p>
+                                            <p id="precioPromo4" class="text-center"></p>
+                                        </div>
+                                        <div class="footer">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <p> </p>
+                            <p class="text-center"><b>Precio: ₡2475</b></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript" src="js/scriptModel.js"></script>
+
+        <div id="contacto" class="container-fluid backgroud-grey">
+            <h2>CONTACTO</h2>
+            <div class="row"> 
+                <div class="col-sm-5">
+                    <p>Proyecto 1 de Lenguajes para Aplicaciones Comerciales</p>
+                    <p>Informacion de contacto del desarrollador</p>
+                    <p><i class="fas fa-chalkboard-teacher"></i> Eyleen Quiros</p>
+                    <p><spam class="glyphicon glyphicon-envelope"></spam> eyleenqh@hotmail.com </p>
+                </div>
+                <div class="col-sm-7">
+                    <p>Para cualquier consulta también puede comunicarse enviando un mensaje en el siguiente espacio:</p>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <input class=form-control type="text" name="nombre" id="nombre" placeholder="Nombre">
+                        </div>
+                        <div class="col-sm-6">
+                            <input class=form-control type="text" name="correo" id="correo" placeholder="Correo">
+                        </div>
+                    </div>
+
+                    <textarea class=form-control id="mensaje" name="mensaje" placeholder="Mensaje" rows="5"></textarea>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <button class="btn-default" type="submit">Enviar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
